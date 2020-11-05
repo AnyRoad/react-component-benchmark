@@ -159,7 +159,10 @@ export default class Benchmark extends Component<BenchmarkPropsType, BenchmarkSt
     // so that it doesn't skew results
     const nextProps = type === BenchmarkType.UPDATE ? { ...componentProps, 'data-test': cycle } : componentProps;
 
-    this.setState((state: BenchmarkStateType) => ({ componentProps: nextProps, cycle: state.cycle + 1 }));
+    setTimeout(
+      () => this.setState((state: BenchmarkStateType) => ({ componentProps: nextProps, cycle: state.cycle + 1 })),
+      0
+    );
   }
 
   getSamples(): Array<FullSampleTimingType> {
