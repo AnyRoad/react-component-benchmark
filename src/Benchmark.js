@@ -104,11 +104,11 @@ export default class Benchmark extends Component<BenchmarkPropsType, BenchmarkSt
     this._samples = [];
   }
 
-  componentWillReceiveProps(nextProps: BenchmarkPropsType) {
+  UNSAFE_componentWillReceiveProps(nextProps: BenchmarkPropsType) {
     this.setState({ componentProps: nextProps.componentProps });
   }
 
-  componentWillUpdate(nextProps: BenchmarkPropsType, nextState: BenchmarkStateType) {
+  UNSAFE_componentWillUpdate(nextProps: BenchmarkPropsType, nextState: BenchmarkStateType) {
     if (nextState.running && !this.state.running) {
       this._startTime = Timing.now();
     }
@@ -163,13 +163,14 @@ export default class Benchmark extends Component<BenchmarkPropsType, BenchmarkSt
   }
 
   getSamples(): Array<FullSampleTimingType> {
-    return this._samples.reduce((memo: Array<FullSampleTimingType>, { start, end: endTime }: SampleTimingType): Array<
-      FullSampleTimingType
-    > => {
-      const end = endTime || 0;
-      memo.push({ start, end, elapsed: end - start });
-      return memo;
-    }, []);
+    return this._samples.reduce(
+      (memo: Array<FullSampleTimingType>, { start, end: endTime }: SampleTimingType): Array<FullSampleTimingType> => {
+        const end = endTime || 0;
+        memo.push({ start, end, elapsed: end - start });
+        return memo;
+      },
+      []
+    );
   }
 
   _handleComplete(endTime: number) {
