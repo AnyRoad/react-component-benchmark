@@ -1,10 +1,13 @@
 {
-  "name": "react-component-benchmark",
+  "name": "@anyroad/react-component-benchmark",
   "version": "0.0.4",
   "description": "A component utility for estimating benchmarks of React components",
   "main": "dist/index.js",
   "author": "Paul Armstrong <paul@spaceyak.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
